@@ -75,7 +75,7 @@
                 e.preventDefault();
                 axios.post(this.$store.state.apiLink + 'add/class', this.newClass, {
                     headers: {
-                        'Authorization': localStorage.getItem('token')
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }
                 })
                     .then(response => {
@@ -91,7 +91,7 @@
                 e.preventDefault();
                 axios.post(this.$store.state.apiLink + 'del/class', this.delClass_id, {
                     headers: {
-                        'Authorization': localStorage.getItem('token')
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }
                 }).then(response => {
                     this.getData()
@@ -102,12 +102,17 @@
             }
         },
         created() {
-            axios.post(this.$store.state.apiLink + 'auth', {token: localStorage.getItem('token')})
-                .then(response => {
-
-                }).catch(error => {
-                this.$router.push('/login');
-            });
+//            axios.post(this.$store.state.apiLink + 'auth', {}, {
+//                headers: {
+//                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+//                }
+//            })
+//                .then(response => {
+//
+//                }).catch(error => {
+//                this.$router.push('/login');
+//            });
+            this.$store.dispatch('auth');
             this.getData();
         }
     }
@@ -123,10 +128,11 @@
     .class__list > ul {
         list-style-type: none;
     }
-    .class__list > ul > li
-    {
+
+    .class__list > ul > li {
         margin: 2em;
     }
+
     .class__list > ul > li > a {
         text-decoration: none;
         color: #000000;
@@ -134,8 +140,8 @@
         transition: all 0.5s;
 
     }
-    .class__list > ul > li > a:hover
-    {
+
+    .class__list > ul > li > a:hover {
         color: #999999;
     }
 
@@ -145,8 +151,8 @@
         border: 0;
         transition: all 0.5s;
     }
-    .logout__card > button:hover, .class_del button:hover, .class__add button:hover
-    {
+
+    .logout__card > button:hover, .class_del button:hover, .class__add button:hover {
         color: #cccccc;
     }
 

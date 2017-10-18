@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from 'axios';
+import router from './router';
 
 Vue.use(Vuex);
 
@@ -61,6 +63,20 @@ export const store = new Vuex.Store({
         },
         planMutations(state, payload) {
             state.plan = payload;
+        }
+    },
+    actions: {
+        auth(context) {
+            axios.post(this.state.apiLink + 'auth', {}, {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            })
+                .then(response => {
+
+                }).catch(error => {
+                router.push({path: '/login'});
+            });
         }
     }
 });

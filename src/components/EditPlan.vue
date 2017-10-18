@@ -74,7 +74,7 @@
                 e.preventDefault();
                 axios.post(this.$store.state.apiLink + 'edit/class/' + this.id, this.planGetters, {
                     headers: {
-                        'Authorization': localStorage.getItem('token')
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }
                 })
                     .then(response => {
@@ -90,12 +90,7 @@
         }
         ,
         created() {
-            axios.post(this.$store.state.apiLink + 'auth', {token: localStorage.getItem('token')})
-                .then(response => {
-
-                }).catch(error => {
-                this.$router.push('/login');
-            });
+            this.$store.dispatch('auth');
 
             this.id = this.$route.params.id;
             this.getData();

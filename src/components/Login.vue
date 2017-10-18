@@ -47,7 +47,7 @@
             }
         },
         created() {
-            axios.post(this.$store.state.apiLink + 'auth', {token: localStorage.getItem('token')})
+            axios.post(this.$store.state.apiLink + 'auth', {token: 'Bearer ' + localStorage.getItem('token')})
                 .then(response => {
                     this.$router.push('/panel');
                 })
