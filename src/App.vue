@@ -3,7 +3,11 @@
         <header>
             <a href="http://zspczarne.pl/" class="header__link">Strona główna</a>
         </header>
-        <router-view/>
+        <div>
+        <transition name="fade">
+            <router-view/>
+        </transition>
+        </div>
         <footer>
             Strona stworzona przez Szymon Ciompała &copy
         </footer>
@@ -12,7 +16,7 @@
 
 <script>
     export default {
-        name: 'app'
+        name: 'app',
     }
 </script>
 <style>
@@ -29,28 +33,32 @@
     }
 
     body {
-        background-color: #f5f5f5;
+        background-color: #fafafa;
         font-family: 'Roboto', sans-serif;
     }
 
     header {
-        background-color: #ffffff;
+        background-color: #3f51b5;
         text-align: center;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
+
     }
 
     .header__link {
         display: block;
         padding: 1em 0;
         text-decoration: none;
-        color: #000;
+        color: #ffffff;
         font-size: 5rem;
     }
 
     footer {
-        background-color: #ffffff;
+        background-color: #3f51b5;
         text-align: center;
         font-size: 3rem;
         padding: 1em 0;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
+        color: #ffffff;
     }
 
     .spinner {
@@ -89,7 +97,18 @@
     .back__link:hover {
         color: #cccccc;
     }
+    .fade-enter-active, .fade-leave-active {
+        transition-property: opacity;
+        transition-duration: 0.5s;
+    }
 
+    .fade-enter-active {
+        transition-delay: 0.5s;
+    }
+
+    .fade-enter, .fade-leave-active {
+        opacity: 0
+    }
     @keyframes spinnerRotate {
         0% {
             transform: rotate(0deg);
@@ -123,8 +142,8 @@
             right: 0;
             margin: 0 auto;
             width: 10%;
-            background-color: #000000;
-            height: 1px;
+            background-color: #ffffff;
+            height: 2px;
             transition: all 0.5s;
         }
 

@@ -19,7 +19,7 @@
             <div class="loading" v-if="loading2">
                 <div class="spinner"></div>
             </div>
-            <div v-else>
+            <div v-else class="list__wraper">
                 <ul v-for="item in technikumGetters">
                     <li>
                         <router-link :to="{ name: 'plan', params: { id: item.id }}" class="card__item">{{item.name}}
@@ -100,12 +100,21 @@
     .card {
         margin: 5em;
         background-color: #ffffff;
-        padding: 2em;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
     }
 
     .card > h2 {
         text-align: center;
         font-size: 4rem;
+        display: block;
+        background-color: #3f51b5;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
+        color: #ffffff;
+        padding: 1em;
+    }
+
+    .list__wraper {
+        padding: 1em;
     }
 
     .card ul {
@@ -124,8 +133,8 @@
         font-size: 3rem;
         transition: all 0.5s;
     }
-    .card__item:hover
-    {
+
+    .card__item:hover {
         color: #cccccc;
     }
 </style>

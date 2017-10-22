@@ -4,9 +4,10 @@
             <div class="spinner"></div>
         </div>
         <div class="table__wraper" v-else>
+
             <table class="plan__table">
                 <tr>
-                    <!--<th>godzina</th>-->
+                    <th>godzina | {{curenTime}}</th>
                     <th>poniedzialek</th>
                     <th>sala</th>
                     <th>wtorek</th>
@@ -19,6 +20,7 @@
                     <th>sala</th>
                 </tr>
                 <tr v-for="(item, index) in planGetters">
+                    <td>{{item.godzina}}</td>
                     <td>{{item.poniedzialek}}</td>
                     <td>{{item.salap}}</td>
                     <td>{{item.wtorek}}</td>
@@ -29,8 +31,10 @@
                     <td>{{item.salac}}</td>
                     <td>{{item.piatek}}</td>
                     <td>{{item.salapi}}</td>
+
                 </tr>
             </table>
+
         </div>
         <router-link to="/" class="back__link">Wybierz inna klase</router-link>
     </div>
@@ -45,7 +49,7 @@
         name: 'Plan',
         data: function () {
             return {
-                loading: 0
+                loading: 0,
             }
         },
         computed: {
@@ -65,16 +69,15 @@
                     this.planMutations(response.data);
                     this.loading = 0;
                 });
-
         }
     }
 </script>
 <style>
     .plan {
-        margin: 2em;
+        margin: 5em;
         background-color: #ffffff;
-        padding: 5em;
         text-align: center;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
     }
 
     .table__wraper {
@@ -95,7 +98,26 @@
         padding: 1.5em;
     }
 
-    tr:nth-child(odd) {
-        background-color: #f5f5f5;
+    tr {
+        border-bottom: 1px solid rgba(0, 0, 0, .14);
     }
+
+    tr:hover {
+        background-color: #eeeeee;
+    }
+
+    tr:first-child {
+        background-color: #3f51b5;
+
+        color: #ffffff;
+    }
+
+    tr:hover:first-child {
+        background-color: #3f51b5;
+    }
+
+    .back__link {
+        padding: 2em;
+    }
+
 </style>

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import Home from '@/components/Home'
 import Plan from '@/components/Plan'
 import Login from '@/components/Login'
@@ -10,13 +9,8 @@ import EditPlan from '@/components/EditPlan'
 Vue.use(Router)
 
 export default new Router({
-    mode: 'history',
+
     routes: [
-        {
-            path: '/hello',
-            name: 'Hello',
-            component: HelloWorld
-        },
         {
             path: '/',
             name: 'home',
@@ -39,7 +33,7 @@ export default new Router({
             path: '/panel',
             name: 'Panel',
             component: Panel
-        } ,
+        },
         {
             path: '/edit/plan/:id',
             name: 'editPlan',
