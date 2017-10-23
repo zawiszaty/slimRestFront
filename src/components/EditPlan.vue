@@ -44,6 +44,7 @@
     import axios from 'axios';
     import {mapMutations} from 'vuex'
     import {mapGetters} from 'vuex'
+    import swal from 'sweetalert'
 
     export default {
         name: 'EditPlan',
@@ -80,6 +81,9 @@
                     .then(response => {
                             console.log('dziala');
                             this.getData();
+                            swal('Zmiennio plan',{
+                                icon: "success"
+                            })
                         }
                     )
                     .catch(error => {

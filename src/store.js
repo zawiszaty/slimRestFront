@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from 'axios';
 import router from './router';
+import swal from 'sweetalert';
 
 Vue.use(Vuex);
 
@@ -75,6 +76,7 @@ export const store = new Vuex.Store({
                 .then(response => {
 
                 }).catch(error => {
+                    swal('Nie jesteś zalogowany');
                 router.push({path: '/login'});
             });
         }

@@ -37,6 +37,7 @@
     import axios from 'axios';
     import {mapGetters} from 'vuex'
     import {mapMutations} from 'vuex'
+    import swal from 'sweetalert';
 
     export default {
         name: 'Panel',
@@ -61,7 +62,9 @@
             ]),
             logout() {
                 localStorage.removeItem('token');
+                swal('zostałes wylogowany');
                 this.$router.push('/');
+
             }
             ,
             getData() {
@@ -79,39 +82,41 @@
                     }
                 })
                     .then(response => {
+                        swal('Dodano klase',{
+                            icon: "success"
+                        });
                             this.getData()
                         }
                     )
                     .catch(error => {
-                        console.log(error);
+                        swal('Coś poszło nie tak :( Prawdopodobnie klasa już została dodana', {
+                            icon: "error",
+                        });
                     });
 
             },
             delClass(e) {
                 e.preventDefault();
-                axios.post(this.$store.state.apiLink + 'del/class', this.delClass_id, {
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    }
-                }).then(response => {
-                    this.getData()
-                })
-                    .catch(error => {
-                        console.log(error);
+                swal('Na pewno ????',{ buttons: ['Nie','TAK'],})
+                    .then((willDelete) => {
+                        if (willDelete) {
+                        axios.post(this.$store.state.apiLink + 'del/class', this.delClass_id, {
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                            }
+                        }).then(response => {
+                            this.getData()
+                        })
+                            .catch(error => {
+                                swal('Coś poszło nie tak :( Prawdopodobnie klasa już została usunieta');
+                            })
+                        swal('Usunięto kalse', {
+                            icon: "success",
+                        })}
                     });
             }
         },
         created() {
-//            axios.post(this.$store.state.apiLink + 'auth', {}, {
-//                headers: {
-//                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-//                }
-//            })
-//                .then(response => {
-//
-//                }).catch(error => {
-//                this.$router.push('/login');
-//            });
             this.$store.dispatch('auth');
             this.getData();
         }
@@ -123,7 +128,7 @@
         margin: 2em;
         padding: 2em;
         text-align: center;
-        box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+        box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
     }
 
     .class__list > ul {

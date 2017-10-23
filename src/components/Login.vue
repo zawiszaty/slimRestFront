@@ -14,6 +14,7 @@
     import axios from 'axios';
     import {mapGetters} from 'vuex'
     import {mapMutations} from 'vuex'
+    import swal from 'sweetalert';
 
     export default {
         name: 'Login',
@@ -47,8 +48,13 @@
             }
         },
         created() {
-            axios.post(this.$store.state.apiLink + 'auth', {token: 'Bearer ' + localStorage.getItem('token')})
+            axios.post(this.$store.state.apiLink + 'auth', {}, {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            })
                 .then(response => {
+                    swal('Jestś juz zalogowany');
                     this.$router.push('/panel');
                 })
         }
@@ -60,13 +66,13 @@
         margin: 2em auto;
     }
 
-    input[type=text],input[type=password]
-    {
+    input[type=text], input[type=password] {
         border: 0;
         outline: 0;
         background-color: #f5f5f5;
         padding: 1.5em;
     }
+
     .card {
         background-color: #ffffff;
         margin: 2em auto;

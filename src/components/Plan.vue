@@ -7,7 +7,7 @@
 
             <table class="plan__table">
                 <tr>
-                    <th>godzina | {{curenTime}}</th>
+                    <th>godzina</th>
                     <th>poniedzialek</th>
                     <th>sala</th>
                     <th>wtorek</th>
@@ -45,6 +45,8 @@
     import {mapGetters} from 'vuex'
     import {mapMutations} from 'vuex'
 
+
+
     export default {
         name: 'Plan',
         data: function () {
@@ -63,6 +65,7 @@
             ]),
         },
         created() {
+
             this.loading = 1;
             axios.get(this.$store.state.apiLink + `plan/` + this.$route.params.id)
                 .then(response => {
